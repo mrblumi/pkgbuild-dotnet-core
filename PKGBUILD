@@ -15,8 +15,8 @@ pkgname=(
  dotnet-source-built-artifacts
 )
 pkgver=7.0.7.sdk107
-_bootstrap=true
-pkgrel=1
+_bootstrap=false
+pkgrel=2
 arch=(x86_64)
 url=https://www.microsoft.com/net/core
 license=(MIT)
@@ -24,8 +24,8 @@ makedepends=(
   bash
   clang
   cmake
-  #dotnet-sdk
-  #dotnet-source-built-artifacts
+  dotnet-sdk
+  dotnet-source-built-artifacts
   git
   icu
   inetutils
@@ -114,18 +114,27 @@ build() {
 
   if [[ $_bootstrap ]]; then
     ./prep.sh --bootstrap
+    ./build.sh \
+      -- \
+      /v:n \
+      /p:ContinueOnPrebuiltBaselineError=true \
+      /p:LogVerbosity=n \
+      /p:MinimalConsoleLogOutput=false \
+      /p:PrebuiltPackagesPath="${srcdir}"/sources/packages \
+      /p:SkipPortableRuntimeBuild=true
   else
-    cp -r /usr/share/dotnet .dotnet
+    cp -r /usr/share/dotnet .
     ln -sf /usr/share/dotnet/source-built-artifacts/Private.SourceBuilt.Artifacts.*.tar.gz packages/archive/
+    ./build.sh \
+      --with-sdk "${srcdir}"/sources/dotnet
+      -- \
+      /v:n \
+      /p:ContinueOnPrebuiltBaselineError=true \
+      /p:LogVerbosity=n \
+      /p:MinimalConsoleLogOutput=false \
+      /p:PrebuiltPackagesPath="${srcdir}"/sources/packages \
+      /p:SkipPortableRuntimeBuild=true
   fi
-  ./build.sh \
-    -- \
-    /v:n \
-    /p:ContinueOnPrebuiltBaselineError=true \
-    /p:LogVerbosity=n \
-    /p:MinimalConsoleLogOutput=false \
-    /p:PrebuiltPackagesPath="${srcdir}"/sources/packages \
-    /p:SkipPortableRuntimeBuild=true
 }
 
 package_dotnet-host() {

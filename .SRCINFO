@@ -1,12 +1,14 @@
 pkgbase = dotnet-core
 	pkgver = 7.0.7.sdk107
-	pkgrel = 1
+	pkgrel = 2
 	url = https://www.microsoft.com/net/core
 	arch = x86_64
 	license = MIT
 	makedepends = bash
 	makedepends = clang
 	makedepends = cmake
+	makedepends = dotnet-sdk
+	makedepends = dotnet-source-built-artifacts
 	makedepends = git
 	makedepends = icu
 	makedepends = inetutils
