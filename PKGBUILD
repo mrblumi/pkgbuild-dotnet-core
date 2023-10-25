@@ -14,7 +14,7 @@ pkgname=(
  aspnet-targeting-pack
  dotnet-source-built-artifacts
 )
-pkgver=7.0.12.sdk112
+pkgver=7.0.13.sdk113
 pkgrel=1
 arch=(x86_64)
 url=https://www.microsoft.com/net/core
@@ -45,7 +45,7 @@ options=(
   !lto
   staticlibs
 )
-_tag=c97215789531577c81c203f54f4b03ca92ab771a
+_tag=e24ee34c8ea5d0c17c95868396b2529194ecec2f
 source=(
   dotnet-installer::git+https://github.com/dotnet/installer.git#tag=${_tag}
   https://github.com/dotnet/runtime/commit/31e4f404c218eae7ba999c4df5346d30f971451c.patch
