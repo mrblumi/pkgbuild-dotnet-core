@@ -1,5 +1,5 @@
 pkgbase = dotnet-core
-	pkgver = 7.0.13.sdk113
+	pkgver = 8.0.0.sdk100
 	pkgrel = 1
 	url = https://www.microsoft.com/net/core
 	arch = x86_64
@@ -26,11 +26,9 @@ pkgbase = dotnet-core
 	optdepends = bash-completion: Bash completion support
 	options = !lto
 	options = staticlibs
-	source = dotnet-installer::git+https://github.com/dotnet/installer.git#tag=e24ee34c8ea5d0c17c95868396b2529194ecec2f
-	source = https://github.com/dotnet/runtime/commit/31e4f404c218eae7ba999c4df5346d30f971451c.patch
+	source = git+https://github.com/dotnet/dotnet.git#tag=40e7f014ff784457efffa58074549735e30772ae
 	source = dotnet.sh
 	b2sums = SKIP
-	b2sums = 36e3dcba3be4d6c3a77cdb92287acaaae681078730d9e94dce3025e926b9691c4439a8b790ca4ece643b8162bdcd7d93d2a3860610841f0b282e8e21c0873446
 	b2sums = 4a64e3ee550e296bdde894f9202c6f372934cc29154f47d302599b4c368825a96a7b786faa6109a24a1101ff130fd9e4d0ccba094ec91e7f2ca645725bf71b34
 
 pkgname = dotnet-host
