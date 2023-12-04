@@ -15,7 +15,7 @@ pkgname=(
  dotnet-source-built-artifacts
 )
 pkgver=8.0.0.sdk100
-pkgrel=1
+pkgrel=2
 arch=(x86_64)
 url=https://www.microsoft.com/net/core
 license=(MIT)
@@ -145,8 +145,8 @@ package_dotnet-runtime() {
     openssl
   )
   optdepends=('lttng-ust2.12: CoreCLR tracing')
-  provides=(dotnet-runtime-7.0)
-  conflicts=(dotnet-runtime-7.0)
+  provides=(dotnet-runtime-${pkgver%.*.sdk*})
+  conflicts=(dotnet-runtime-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner shared/Microsoft.NETCore.App
@@ -156,8 +156,8 @@ package_dotnet-runtime() {
 package_aspnet-runtime() {
   pkgdesc='The ASP.NET Core runtime'
   depends=(dotnet-runtime)
-  provides=(aspnet-runtime-7.0)
-  conflicts=(aspnet-runtime-7.0)
+  provides=(aspnet-runtime-${pkgver%.*.sdk*})
+  conflicts=(aspnet-runtime-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner shared/Microsoft.AspNetCore.App
@@ -174,8 +174,8 @@ package_dotnet-sdk() {
     netstandard-targeting-pack
   )
   optdepends=('aspnet-targeting-pack: Build ASP.NET Core applications')
-  provides=(dotnet-sdk-7.0)
-  conflicts=(dotnet-sdk-7.0)
+  provides=(dotnet-sdk-${pkgver%.*.sdk*})
+  conflicts=(dotnet-sdk-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner sdk sdk-manifests templates
@@ -195,8 +195,8 @@ package_netstandard-targeting-pack() {
 package_dotnet-targeting-pack() {
   pkgdesc='The .NET Core targeting pack'
   depends=(netstandard-targeting-pack)
-  provides=(dotnet-targeting-pack-7.0)
-  conflicts=(dotnet-targeting-pack-7.0)
+  provides=(dotnet-targeting-pack-${pkgver%.*.sdk*})
+  conflicts=(dotnet-targeting-pack-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/Microsoft.NETCore.App.{Host.arch-x64,Ref}
@@ -206,8 +206,8 @@ package_dotnet-targeting-pack() {
 package_aspnet-targeting-pack() {
   pkgdesc='The ASP.NET Core targeting pack'
   depends=(dotnet-targeting-pack)
-  provides=(aspnet-targeting-pack-7.0)
-  conflicts=(aspnet-targeting-pack-7.0)
+  provides=(aspnet-targeting-pack-${pkgver%.*.sdk*})
+  conflicts=(aspnet-targeting-pack-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/Microsoft.AspNetCore.App.Ref
