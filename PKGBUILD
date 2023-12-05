@@ -15,7 +15,7 @@ pkgname=(
  dotnet-source-built-artifacts
 )
 pkgver=8.0.0.sdk100
-pkgrel=2
+pkgrel=3
 arch=(x86_64)
 url=https://www.microsoft.com/net/core
 license=(MIT)
@@ -46,12 +46,8 @@ options=(
   staticlibs
 )
 _tag=40e7f014ff784457efffa58074549735e30772ae
-source=(
-  git+https://github.com/dotnet/dotnet.git#tag=${_tag}
-  dotnet.sh
-)
-b2sums=('SKIP'
-        '4a64e3ee550e296bdde894f9202c6f372934cc29154f47d302599b4c368825a96a7b786faa6109a24a1101ff130fd9e4d0ccba094ec91e7f2ca645725bf71b34')
+source=(git+https://github.com/dotnet/dotnet.git#tag=${_tag})
+b2sums=(SKIP)
 
 prepare() {
   cd dotnet
@@ -129,7 +125,6 @@ package_dotnet-host() {
   ln -s /usr/share/dotnet/host/fxr/${pkgver%.sdk*}/libhostfxr.so "${pkgdir}"/usr/lib/libhostfxr.so
   install -Dm 644 dotnet/src/sdk/scripts/register-completions.bash "${pkgdir}"/usr/share/bash-completion/completions/dotnet
   install -Dm 644 dotnet/src/sdk/scripts/register-completions.zsh "${pkgdir}"/usr/share/zsh/site-functions/_dotnet
-  install -Dm 644 dotnet.sh -t "${pkgdir}"/etc/profile.d/
 }
 
 package_dotnet-runtime() {
