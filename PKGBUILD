@@ -14,7 +14,7 @@ pkgname=(
  aspnet-targeting-pack
  dotnet-source-built-artifacts
 )
-pkgver=8.0.1.sdk101
+pkgver=8.0.2.sdk102
 pkgrel=1
 arch=(x86_64)
 url=https://www.microsoft.com/net/core
@@ -45,7 +45,7 @@ options=(
   !lto
   staticlibs
 )
-_tag=b27976e5a6850466ee5b4ce24f91ee93bef645f7
+_tag=d396b0c4d3e51c2d8d679b2f7233912bc5bfc2fa
 source=(git+https://github.com/dotnet/dotnet.git#tag=${_tag})
 b2sums=(SKIP)
 
@@ -58,11 +58,11 @@ prepare() {
   local _bootstrapver=$(xmllint --xpath "//*[local-name()='PrivateSourceBuiltArtifactsPackageVersion']/text()" src/installer/eng/Versions.props)
   local _previousver=$(pacman -Q dotnet-source-built-artifacts | sed -r 's/.*([0-9]+\.[0-9]+)\.[0-9]+\.sdk([0-9]+)-.*/\1.\2/')
 
-#  if [[ $_bootstrapver == $_previousver ]]; then
+  if [[ $_bootstrapver == $_previousver ]]; then
     cp -r /usr/share/dotnet .dotnet
     ln -sf /usr/share/dotnet/source-built-artifacts/Private.SourceBuilt.Artifacts.*.tar.gz prereqs/packages/archive/
     ln -sf /usr/share/dotnet/source-built-artifacts/Private.SourceBuilt.Prebuilts.*.tar.gz prereqs/packages/archive/
-#  fi
+  fi
   ./prep.sh
 }
 
