@@ -118,7 +118,7 @@ package_dotnet-host() {
   )
   optdepends=('bash-completion: Bash completion support')
 
-  install -dm 755 "${pkgdir}"/{usr/{bin,lib,share/{dotnet,licenses/dotnet-host}}}
+  install -dm 755 "${pkgdir}"/usr/{bin,lib,share/{dotnet,licenses/dotnet-host}}
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner dotnet host
   bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/licenses/dotnet-host/ --no-same-owner LICENSE.txt ThirdPartyNotices.txt
   ln -s /usr/share/dotnet/dotnet "${pkgdir}"/usr/bin/dotnet
