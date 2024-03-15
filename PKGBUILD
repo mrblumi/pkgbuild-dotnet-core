@@ -1,4 +1,5 @@
-# Maintainer: Maxime Gauduin <alucryd@archlinux.org>
+# Maintainer: MrBlumi <>
+# Contributor: Maxime Gauduin <alucryd@archlinux.org>
 # Contributor: Kristian Mosegaard <kristian@mosen.me>
 # Contributor: Max Liebkies <mail@maxliebkies.de>
 # Contributor: Krzysztof Bogacki <krzysztof.bogacki@leancode.pl>
@@ -16,7 +17,7 @@ pkgname=(
 )
 pkgver=8.0.3.sdk103
 pkgrel=1
-arch=(x86_64)
+arch=(aarch64)
 url=https://www.microsoft.com/net/core
 license=(MIT)
 makedepends=(
@@ -119,8 +120,8 @@ package_dotnet-host() {
   optdepends=('bash-completion: Bash completion support')
 
   install -dm 755 "${pkgdir}"/usr/{bin,lib,share/{dotnet,licenses/dotnet-host}}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner dotnet host
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/licenses/dotnet-host/ --no-same-owner LICENSE.txt ThirdPartyNotices.txt
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner dotnet host
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/licenses/dotnet-host/ --no-same-owner LICENSE.txt ThirdPartyNotices.txt
   ln -s /usr/share/dotnet/dotnet "${pkgdir}"/usr/bin/dotnet
   ln -s /usr/share/dotnet/host/fxr/${pkgver%.sdk*}/libhostfxr.so "${pkgdir}"/usr/lib/libhostfxr.so
   install -Dm 644 dotnet/src/sdk/scripts/register-completions.bash "${pkgdir}"/usr/share/bash-completion/completions/dotnet
@@ -144,7 +145,7 @@ package_dotnet-runtime() {
   conflicts=(dotnet-runtime-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner shared/Microsoft.NETCore.App
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner shared/Microsoft.NETCore.App
   ln -s dotnet-host "${pkgdir}"/usr/share/licenses/dotnet-runtime
 }
 
@@ -155,7 +156,7 @@ package_aspnet-runtime() {
   conflicts=(aspnet-runtime-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner shared/Microsoft.AspNetCore.App
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner shared/Microsoft.AspNetCore.App
   ln -s dotnet-host "${pkgdir}"/usr/share/licenses/aspnet-runtime
 }
 
@@ -173,7 +174,7 @@ package_dotnet-sdk() {
   conflicts=(dotnet-sdk-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner sdk sdk-manifests templates
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner sdk sdk-manifests templates
   ln -s dotnet-host "${pkgdir}"/usr/share/licenses/dotnet-sdk
 }
 
@@ -183,7 +184,7 @@ package_netstandard-targeting-pack() {
   conflicts=(netstandard-targeting-pack-2.1)
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/NETStandard.Library.Ref
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/NETStandard.Library.Ref
   ln -s dotnet-host "${pkgdir}"/usr/share/licenses/netstandard-targeting-pack
 }
 
@@ -194,7 +195,7 @@ package_dotnet-targeting-pack() {
   conflicts=(dotnet-targeting-pack-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/Microsoft.NETCore.App.{Host.arch-x64,Ref}
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/Microsoft.NETCore.App.{Host.archarm-arm64,Ref}
   ln -s dotnet-host "${pkgdir}"/usr/share/licenses/dotnet-targeting-pack
 }
 
@@ -205,15 +206,15 @@ package_aspnet-targeting-pack() {
   conflicts=(aspnet-targeting-pack-${pkgver%.*.sdk*})
 
   install -dm 755 "${pkgdir}"/usr/share/{dotnet,licenses}
-  bsdtar -xf dotnet/artifacts/x64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-arch-x64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/Microsoft.AspNetCore.App.Ref
+  bsdtar -xf dotnet/artifacts/arm64/Release/dotnet-sdk-${pkgver%.*.sdk*}.${pkgver#*sdk}-archarm-arm64.tar.gz -C "${pkgdir}"/usr/share/dotnet/ --no-same-owner packs/Microsoft.AspNetCore.App.Ref
   ln -s dotnet-host "${pkgdir}"/usr/share/licenses/aspnet-targeting-pack
 }
 
 package_dotnet-source-built-artifacts() {
   pkgdesc='Internal package for building the .NET Core SDK'
 
-  install -Dm 644 dotnet/artifacts/x64/Release/Private.SourceBuilt.Artifacts.*.tar.gz -t "${pkgdir}"/usr/share/dotnet/source-built-artifacts/
-  install -Dm 644 dotnet/artifacts/x64/Release/Private.SourceBuilt.Prebuilts.*.tar.gz -t "${pkgdir}"/usr/share/dotnet/source-built-artifacts/
+  install -Dm 644 dotnet/artifacts/arm64/Release/Private.SourceBuilt.Artifacts.*.tar.gz -t "${pkgdir}"/usr/share/dotnet/source-built-artifacts/
+  install -Dm 644 dotnet/artifacts/arm64/Release/Private.SourceBuilt.Prebuilts.*.tar.gz -t "${pkgdir}"/usr/share/dotnet/source-built-artifacts/
 }
 
 # vim: ts=2 sw=2 et:
